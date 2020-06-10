@@ -23,10 +23,11 @@ async function getRandomUser() {
     money: Math.floor(Math.random() * 1000000),
   };
 
-    console.log(newUser);
+    // console.log(newUser);
     addData(newUser);
 }
 
+// Double everyone's money
 function doubleMoney() {
   data = data.map(user => {
       return {
@@ -37,18 +38,31 @@ function doubleMoney() {
   updateDOM();
 }
 
+// Filter only millionaires
 function showMillionaires() {
   data = data.filter(user => user.money > 1000000);
 
   updateDOM();
 }
 
+// Sort users by richest
 function sortByRichest() {
-  return true;
+//   console.log(123);
+    data.sort((a,b) => b.money - a.money);
+
+    updateDOM();
 }
 
+// Calculate the total wealth
 function calculateWealth() {
-  return true;
+    const wealth = data.reduce((acc, user) => (acc += user.money), 0);
+
+    // console.log(formatMoney(wealth));
+
+    const addWealth = document.createElement('div');
+    addWealth.innerHTML = `<h3>Total Wealth: <strong>${formatMoney(wealth)}</strong></h3>`;
+
+    main.appendChild(addWealth);
 }
 
 // Add new obj to data arr
